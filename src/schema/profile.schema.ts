@@ -27,10 +27,11 @@ message:null
 export type profileFormStateType={
   success:boolean ,
   error :{
-     details?:[],
-    city?:[],
-    phone?:[] ,
+     details?:string[],
+    city?:string[],
+    phone?:string[] ,
 
   } ,
   message: string | null
 }
+export type AddressResponseType = ProfileFormType & { _id: string };

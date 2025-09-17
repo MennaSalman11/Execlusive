@@ -35,10 +35,11 @@ message:null
 export type addressCheckoutFormStateType={
   success:boolean ,
   error :{
- details:[],
-    city:[],
-    phone:[] ,
-    paymentMethod:[]
+    cartId?:string[],
+ details?:string[],
+    city?:string[],
+    phone?:string[] ,
+    paymentMethod?:[]
   } ,
   message: string | null
 }

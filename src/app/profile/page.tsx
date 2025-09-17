@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import Link from "next/link";
-import { ProfileFormSchema, ProfileFormType } from "@/schema/profile.schema";
+import { AddressResponseType, ProfileFormSchema, ProfileFormType } from "@/schema/profile.schema";
 import { deleteAddress, getAddress, saveUserAddress } from "@/lib/services/address.services";
 import { toast } from "sonner";
 import { useEffect, useState, useTransition } from "react";
@@ -21,7 +21,7 @@ export default function ProfilePage() {
     defaultValues: { details: "", city: "", phone: "" },
   });
 
-  const [addresses, setAddresses] = useState<ProfileFormType[]>([]);
+  const [addresses, setAddresses] = useState<AddressResponseType[]>([]);
   const [loading, setLoading] = useState(false);
 
   async function fetchAddress() {
@@ -30,8 +30,8 @@ export default function ProfilePage() {
     console.log("Fetched addresses:", res);
 
     if (res.success) {
-      if (Array.isArray(res?.data?.data)) {
-        setAddresses(res?.data?.data);
+      if (Array.isArray((res as any)?.data?.data)) {
+        setAddresses((res as any)?.data?.data);
       } else {
         setAddresses([]);
       }
@@ -52,7 +52,7 @@ export default function ProfilePage() {
       toast.success("Address deleted successfully", { position: "top-center" });
       fetchAddress();
     } else {
-      toast.error(res?.error || "Failed to delete address", { position: "top-center" });
+      toast.error("Failed to delete address", { position: "top-center" });
     }
   };
 
