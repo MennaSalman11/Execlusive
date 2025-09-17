@@ -32,7 +32,7 @@ export default function CheckoutrPage() {
   const { cartDetails, setCartDetails } = useCart();
  
 
-  const [action, formAction] = useActionState(handlePayment as any, addressCheckoutFormState as any)
+  const [action, formAction] = useActionState(handlePayment, addressCheckoutFormState )
   const router = useRouter()
   const form = useForm<AdressCheckoutFormType>({
     resolver: zodResolver(AdressCheckoutFormSchema),
