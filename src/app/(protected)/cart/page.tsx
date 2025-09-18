@@ -148,7 +148,7 @@ export default function CartPage() {
                 <ul className="divide-y divide-gray-900">
                   <li className="py-6 flex justify-between">
                     <span>SubTotal:</span>
-                    <span>1{product.price} EGP</span>
+                    <span>{product.price} EGP</span>
                   </li>
                   <li className="py-6 flex justify-between">
                     <span>Shipping:</span>
