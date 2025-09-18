@@ -1,13 +1,13 @@
 
 "use server";
-import { addressFormStateType, AdressFormSchema } from '@/schema/address.schema';
+import { addressCheckoutFormStateType, AdressCheckoutFormSchema } from '@/schema/addressCheckout.schema';
 import { getUserToken } from '../server-utils';
 
 
 export async function handlePayment(
-  formState: addressFormStateType ,
+  formState: addressCheckoutFormStateType ,
   formData:FormData
-){
+): Promise<addressCheckoutFormStateType>{
 const ShippingAddress ={
   details: formData.get('details'),
   city: formData.get('city'),
@@ -17,7 +17,7 @@ const ShippingAddress ={
  const paymentMethod = formData.get('paymentMethod');
  console.log("payment " , paymentMethod);
  
-  const parseData = AdressFormSchema.safeParse({...ShippingAddress , cartId , paymentMethod});
+  const parseData = AdressCheckoutFormSchema.safeParse({...ShippingAddress , cartId , paymentMethod});
   if (!parseData.success) {
     return {
       success: false,
@@ -56,7 +56,7 @@ const endpoint = paymentMethod==='cash'
         error: {},
         message: data.message || "Payment failed",
         callbackUrl:'/cart' ,
-        paymentMethod
+       
       };
     }
     return{
@@ -64,14 +64,14 @@ const endpoint = paymentMethod==='cash'
         error: {},
         message: data.message || "Payment success", 
         callbackUrl:paymentMethod==='cash'? '/allorders' : data.session.url ,
-        paymentMethod
+    
     }
   }catch(error){
 console.log(error);
    return {
         success: false,
         error: {},
-        message: error || "Payment failed",
+        message: (error as string) || "Payment failed",
       };
   }
 }

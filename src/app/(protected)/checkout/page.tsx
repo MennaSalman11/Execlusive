@@ -61,17 +61,17 @@ export default function CheckoutrPage() {
       if (action.success && action.message) {
 
 
-        if (action.paymentMethod === 'cash') {
+        if (form.getValues('paymentMethod') === 'cash') {
           toast.success(action.message, { position: 'top-center' });
           setCartDetails(null)
           timeout = setTimeout(() => {
-            router.push(action.callbackUrl)
+            router.push(action.callbackUrl || '/allorders')
           }, 2000);
         } else if (!action.success && action.message) {
           toast.error(action.message, { position: 'top-center' })
         }
         else {
-          window.location.href = action.callbackUrl;
+          window.location.href = action.callbackUrl as string;
         }
       }
     }
@@ -104,7 +104,7 @@ export default function CheckoutrPage() {
                 <FormItem hidden>
 
                   <FormControl>
-                    <Input {...field} value={cartDetails?.cartId} hidden />
+                    <Input {...field} value={cartDetails?.cartId || ''} hidden />
                   </FormControl>
 
 

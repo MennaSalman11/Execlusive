@@ -30,7 +30,8 @@ error:{
     paymentMethod:[],
 
 },
-message:null
+message:null , 
+callbackUrl:""
   }
 export type addressCheckoutFormStateType={
   success:boolean ,
@@ -39,7 +40,8 @@ export type addressCheckoutFormStateType={
  details?:string[],
     city?:string[],
     phone?:string[] ,
-    paymentMethod?:[]
+    paymentMethod?:string[]
   } ,
-  message: string | null
+  message: string | null , 
+  callbackUrl?:string
 }

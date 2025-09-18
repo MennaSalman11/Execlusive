@@ -16,7 +16,7 @@ import React from "react";
 
 export default async function AllOrdersPage() {
   const { data } = await getAllOrders();
-  const orders = data?.data || []; // ✅ orders array
+  const orders = data?.data || []; 
 
 
   console.log("orders:", orders);
