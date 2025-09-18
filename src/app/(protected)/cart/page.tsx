@@ -121,7 +121,7 @@ export default function CartPage() {
                         <TableCell className="text-right">{product.price * product.count}</TableCell>
                       </TableRow>
                     ))
-                  }
+}
                 </TableBody>
               </Table>
               <div className="flex justify-between">
@@ -142,12 +142,13 @@ export default function CartPage() {
                 <Input placeholder="Coupon Code" />
                 <Button variant={'destructive'}>Apply Coupon</Button>
               </div>
-              <div className="w-5/12 py-8 px-6 border border-gray-950">
+             { cartDetails.data?.products?.map((product) =>(
+<div className="w-5/12 py-8 px-6 border border-gray-950">
                 <h3 className="font-bold text-xl mb-6">Cart Total</h3>
                 <ul className="divide-y divide-gray-900">
                   <li className="py-6 flex justify-between">
                     <span>SubTotal:</span>
-                    <span>100 EGP</span>
+                    <span>1{product.price} EGP</span>
                   </li>
                   <li className="py-6 flex justify-between">
                     <span>Shipping:</span>
@@ -155,7 +156,7 @@ export default function CartPage() {
                   </li>
                   <li className="py-6 flex justify-between">
                     <span>Total:</span>
-                    <span>100 EGP</span>
+                    <span>{product.count * product.price}EGP</span>
                   </li>
                 </ul>
                 <div className="flex justify-center">
@@ -167,6 +168,8 @@ export default function CartPage() {
                   </Button>
                 </div>
               </div>
+             ))}
+              
             </section>
           </>)
         }
